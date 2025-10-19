@@ -2,6 +2,10 @@ let score = {
   computer: 0,
   user: 0,
   tie: 0,
+  updateScore: function () {
+    document.querySelector("#score").innerHTML = `
+  score: Computer Won: ${this.computer}, User Won: ${this.user}, Tie: ${this.tie}`;
+  },
 };
 function createRandomChoice() {
   let randomChoice = Math.floor(Math.random() * 3 + 1);
@@ -21,8 +25,6 @@ function computeComputerChoice() {
   return computerChooseText;
 }
 function showResult(userChoice, computerchoice, result) {
-  document.querySelector("#score").innerHTML = `
-  score: Computer Won: ${score.computer}, User Won: ${score.user}, Tie: ${score.tie}`;
   document.querySelector("#result").innerHTML = `You choose  ${userChoice}.<br>
        computer choose ${computerchoice}. <br>
        The result is 👑${result}👑`;
@@ -43,6 +45,7 @@ function whoWin(userChoice, computerChooseText) {
     result = `Computer Won`;
     score.computer++;
   }
+  score.updateScore();
   return result;
 }
 function rockClicked() {

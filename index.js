@@ -3,10 +3,35 @@ let score = {
   user: 0,
   tie: 0,
   updateScore: function () {
+    this.saveScore();
     document.querySelector("#score").innerHTML = `
   score: Computer Won: ${this.computer}, User Won: ${this.user}, Tie: ${this.tie}`;
   },
+  saveScore: function () {
+    let scoreStr = JSON.stringify(this);
+    localStorage.setItem("score", scoreStr);
+    console.log(`Socre saved: ${scoreStr}`);
+  },
 };
+function initialize() {
+  let scoreStr = localStorage.getItem("score");
+  if (scoreStr) {
+    console.log(`previus scored found ${scoreStr}`);
+    let scoreVal = JSON.parse(scoreStr);
+    score.computer = scoreVal.computer;
+    score.user = scoreVal.user;
+    score.tie = scoreVal.tie;
+    score.updateScore();
+  }
+}
+function resetScore() {
+  score.computer = 0;
+  score.user = 0;
+  score.tie = 0;
+  score.updateScore();
+  document.querySelector("#result").innerHTML = "";
+}
+
 function createRandomChoice() {
   let randomChoice = Math.floor(Math.random() * 3 + 1);
   return randomChoice;
@@ -66,3 +91,4 @@ function scissorClicked() {
   let result = whoWin(user, computerChooseText);
   showResult(user, computerChooseText, result);
 }
+initialize();

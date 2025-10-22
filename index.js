@@ -5,7 +5,7 @@ let score = {
   updateScore: function () {
     this.saveScore();
     document.querySelector("#score").innerHTML = `
-  score: Computer Won: ${this.computer}, User Won: ${this.user}, Tie: ${this.tie}`;
+  Score: Computer Won: ${this.computer}, User Won: ${this.user}, Tie: ${this.tie}`;
   },
   saveScore: function () {
     let scoreStr = JSON.stringify(this);
